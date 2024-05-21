@@ -35,12 +35,12 @@ export function BoardCard({
   orgId,
   isFavourite,
 }: BoardCardProps) {
-//   const { mutate: favourite, isLoading: isFavouriting } = useApiMutation(
-//     api.board.favourite
-//   );
-//   const { mutate: unfavourite, isLoading: isUnfavouriting } = useApiMutation(
-//     api.board.unfavourite
-//   );
+  const { mutate: favourite, pending: isFavouriting } = useApiMutation(
+    api.board.favourite
+  );
+  const { mutate: unfavourite, pending: isUnfavouriting } = useApiMutation(
+    api.board.unfavourite
+  );
 
   const { userId } = useAuth();
   const authorLabel = userId === ownerId ? "You" : ownerName;
@@ -48,17 +48,17 @@ export function BoardCard({
     addSuffix: true,
   });
 
-//   const toggleFavourite = () => {
-//     if (isFavourite) {
-//       unfavourite({ id: id as Id<"boards"> }).catch(() =>
-//         toast.error("Failed to unfavourite board")
-//       );
-//     } else {
-//       favourite({ id: id as Id<"boards">, orgId }).catch(() =>
-//         toast.error("Failed to favourite board")
-//       );
-//     }
-//   };
+  const toggleFavourite = () => {
+    if (isFavourite) {
+      unfavourite({ id: id as Id<"boards"> }).catch(() =>
+        toast.error("Failed to unfavourite board")
+      );
+    } else {
+      favourite({ id: id as Id<"boards">, orgId }).catch(() =>
+        toast.error("Failed to favourite board")
+      );
+    }
+  };
 
   return (
     <Link href={`/boards/${id}`}>
@@ -77,8 +77,8 @@ export function BoardCard({
           title={title}
           authorLabel={authorLabel}
           createdAtLabel={createdAtLabel}
-          onClick={() => {}}
-          disabled={false}
+          onClick={toggleFavourite}
+          disabled={isFavouriting || isUnfavouriting}
         />
       </div>
     </Link>
