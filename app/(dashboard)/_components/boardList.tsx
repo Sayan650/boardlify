@@ -5,7 +5,6 @@ import { EmptyBoards } from "./empty-boards";
 import { EmptyFavourites } from "./empty-favourites";
 import { EmptySearch } from "./empty-search";
 import { api } from "@/convex/_generated/api";
-// import { BoardCard } from "./boardCard";
 import { NewBoardButton } from "./newBoardButton";
 import { BoardCard } from "./boardCard";
 
