@@ -9,7 +9,7 @@ import { ModalProvider } from "@/providers/modal-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Miro-CLone",
+  title: "Boardlify",
   description: "Miro is now open source",
 };
 
