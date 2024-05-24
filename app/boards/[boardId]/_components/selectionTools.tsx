@@ -2,13 +2,13 @@
 
 import { Hint } from "@/components/hint";
 import { Button } from "@/components/ui/button";
+import { useSelectionBounds } from "@/hooks/use-selection-bounds";
 // import { useDeleteLayers } from "@/hooks/useDeleteLayers";
-// import { useSelectionBounds } from "@/hooks/useSelectionBounds";
 import { useMutation, useSelf } from "@/liveblocks.config";
 import { Camera, Color } from "@/types/canvas";
 import { BringToFront, SendToBack, Trash2 } from "lucide-react";
 import { memo } from "react";
-// import { ColorPicker } from "./colorPicker";
+import { ColorPicker } from "./colorPicker";
 
 interface SelectionToolsProps {
   camera: Camera;
@@ -20,7 +20,7 @@ export const SelectionTools = memo(
     const selection = useSelf((self) => self.presence.selection);
 
     // const deleteLayers = useDeleteLayers();
-    // const selectionBounds = useSelectionBounds();
+    const selectionBounds = useSelectionBounds();
 
     const handleMoveToBack = useMutation(
       ({ storage }) => {
@@ -79,22 +79,22 @@ export const SelectionTools = memo(
       [selection, setLastUsedColor]
     );
 
-    // if (!selectionBounds) return null;
+    if (!selectionBounds) return null;
 
-    // const x = selectionBounds.width / 2 + selectionBounds.x - camera.x;
-    // const y = selectionBounds.y + camera.y;
+    const x = selectionBounds.width / 2 + selectionBounds.x - camera.x;
+    const y = selectionBounds.y + camera.y;
 
     return (
       <div
         className="absolute p-3 rounded-xl bg-white shadow-sm border flex select-none"
         style={{
-        //   transform: `translate(
-        //     calc(${x}px - 50%),
-        //     calc(${y - 16}px - 100%)
-        //   )`,
+          transform: `translate(
+            calc(${x}px - 50%),
+            calc(${y - 16}px - 100%)
+          )`,
         }}
       >
-        {/* <ColorPicker onChange={handleColorChange} /> */}
+        <ColorPicker onChange={handleColorChange} />
         <div className="flex flex-col gap-y-0.5">
           <Hint label="Bring to front">
             <Button variant="board" size="icon" onClick={handleMoveToFront}>
