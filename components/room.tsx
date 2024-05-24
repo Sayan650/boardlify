@@ -11,7 +11,9 @@ export const Room = ({ children, roomId, fallback }: { children: ReactNode, room
     return (
         <RoomProvider id={roomId} initialPresence={{
             cursor: null,
-            selection: []
+            selection: [],
+            pencilColor: null,
+            pencilDraft: null,
         }}
         initialStorage={{
             layers: new LiveMap<string, LiveObject<Layer>>(),
